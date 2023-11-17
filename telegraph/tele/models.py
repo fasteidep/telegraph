@@ -1,7 +1,10 @@
 from django.db import models
+from django.urls import reverse
+
 
 class Okrug(models.Model):
     name = models.CharField(max_length=200)
+
 
 class Uchastok(models.Model):
     namber = models.CharField(max_length=200)
@@ -29,3 +32,12 @@ class kartochka(models.Model):
     
     def __str__(self):
         return f'{self.year},{self.first_name},{self.second_name},{self.adress}'
+    
+
+class Article(models.Model):
+    name = models.CharField(max_length=200)
+    msg = models.TextField()
+    img = models.ImageField(null=True,blank=True,upload_to='media/img')
+
+    def get_absolute_url(self):
+        return reverse('showArticle', kwargs={'pk': self.pk})

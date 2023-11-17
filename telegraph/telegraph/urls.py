@@ -14,17 +14,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.conf.urls.static import static
+from django.urls import path, re_path
 
 from tele.views import *
 
+
 urlpatterns = [
-    path('', adminka),
+    path('', ArticleCreate.as_view()),
+    # re_path(r'^(?P<year>[0-9]{2})-(?P<month>[0-9]{2})-(?P<day>[0-9]{4})$', ShowArticle.as_view(), name='showArticle2'),
+    path('<int:pk>', ShowArticle.as_view(), name='showArticle'),
     path('home', home),
     path('admin/', admin.site.urls),
-    path('name', get_name),
+    # path('name', get_name),
+    path('name', get_name_by_id.as_view()),
     path('add_okrig', add_okrig)
 ]
+
+if settings.DEBUG:
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = pageNotFound

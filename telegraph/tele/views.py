@@ -1,7 +1,10 @@
+from typing import Any
+from django import http
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView, FormView, CreateView, DetailView
 
 from .forms import *
 
@@ -42,6 +45,20 @@ def get_name(request):
 
     return render(request, 'name.html', {'form': form})
 
+# def get_name_by_id(request, slug):
+#     split_slug = slug.split('-')
+#     # return HttpResponse(f"Эта страница под id { ' '.join(slug.split('-'))}")
+#     return render(request, 'Telegraph.html')
+    
+class get_name_by_id(TemplateView):
+    template_name = 'tele/Telegraph.html'
+    
+    def post(self, request, *args: Any, **kwargs: Any) -> HttpResponse:
+        print(args, kwargs)
+        return super().post(request, *args, **kwargs)
+        
+    
+
 def add_okrig(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -60,3 +77,30 @@ def add_okrig(request):
         form = AddOkrug()
 
     return render(request, 'add_okrig.html', {'form': form})
+
+    
+
+class ArticleCreate(CreateView):
+    model = Article
+    fields = ['name','msg','img']
+    template_name = "tele/CreateArticle.html"
+    
+    
+class ShowArticle(DetailView):
+    model = Article
+    template_name = "tele/ShowArticle.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(ShowArticle, self).get_context_data(**kwargs)
+        
+        context['article'] = self.model.objects.get(pk=self.kwargs['pk']) 
+        
+        return context
+    
+    
+    
+    
+    
+    
+
+        

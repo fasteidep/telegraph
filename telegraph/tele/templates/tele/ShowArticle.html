@@ -1,0 +1,7 @@
+{% load static %}
+{% block content %}
+{{object.name}}<br>
+{{object.msg}}
+{{ object.img.path }}
+<img src='{{object.img.url}}'/>
+{% endblock %}
