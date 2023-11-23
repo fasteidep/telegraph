@@ -7,7 +7,7 @@
 body,html{padding:0;margin:0;min-height:100%}
 [contenteditable=true]:focus,button:focus,input:focus,textarea:focus{outline:0}
 textarea{resize:none}
-.tl_page_wrap{display:flex;flex-direction:column;min-height:var(--viewport-height,100vh);}
+.tl_page_wrap{display:flex;flex-direction:column;min-height:var(--viewport-height,100vh)}
 .tl_page{max-width:732px;margin:0 auto;position:relative;padding:21px 0;width:100%;flex-grow:1}
 .tl_page_footer{background-color:#f2f2f2;display:none}
 .tl_page_footer_visible{display:block}
@@ -70,8 +70,8 @@ textarea{resize:none}
 body.mobile .button_hover{display:none}
 .buttons{position:relative}
 .buttons .button_hover,.buttons button{width:26px;height:26px;display:inline-block;vertical-align:top}
-.buttons button:after,.buttons button:before,.tl_blocks .buttons button{background:url(/images/icons.png?1) -8px 26px no-repeat}
-@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){.buttons button:after,.buttons button:before,.tl_blocks .buttons button{background-image:url(/images/icons_2x.png?1);background-size:40px 487px}}
+.buttons button:after,.buttons button:before,.tl_blocks .buttons button{background:url(https://edit.telegra.ph/images/icons.png?1) -8px 26px no-repeat}
+@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){.buttons button:after,.buttons button:before,.tl_blocks .buttons button{background-image:url(https://edit.telegra.ph/images/icons_2x.png?1);background-size:40px 487px}}
 .buttons #_bold_button:before{background-position:-8px -6px}
 .buttons #_bold_button:after{background-position:-8px -38px}
 .buttons #_italic_button:before{background-position:-8px -70px}
@@ -129,7 +129,7 @@ body.mobile .button_hover{display:none}
 .tl_article address a[href]{border-bottom:none}
 .tl_article.tl_article_edit address a[href]{border-bottom:.1em solid rgba(0,0,0,.4)}
 .tl_article .tl_article_content p{margin:0 21px 12px;word-wrap:break-word}
-.tl_article .tl_article_content code,.tl_article .tl_article_content pre{font-family:Menlo,'Courier New',Courier,monospace;font-size:16px;ground:rgb(0,0,0)}
+.tl_article .tl_article_content code,.tl_article .tl_article_content pre{font-family:Menlo,'Courier New',Courier,monospace;font-size:16px;background:#F5F8FC}
 .tl_article .tl_article_content code{padding:1px 3px}
 .tl_article .tl_article_content pre{margin:14px 0;padding:7px 21px;white-space:pre-wrap;word-wrap:break-word}
 .tl_article .tl_article_content h3,.tl_article .tl_article_content h4{font-family:CustomSansSerif,'Lucida Grande',Arial,sans-serif;font-weight:700;font-style:normal;font-size:28px;margin:18px 21px 9px}

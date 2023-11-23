@@ -1,5 +1,4 @@
 {% load static %}
-{% block content %}
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -22,13 +21,13 @@
     <link rel="shortcut icon" href="https://telegra.ph/favicon.ico?1" type="image/x-icon">
     <link rel="icon" type="image/png" href="https://telegra.ph/images/favicon.png?1" sizes="16x16">
     <link rel="icon" type="image/png" href="https://telegra.ph/images/favicon_2x.png?1" sizes="32x32">
-    <link href="{% static "css/quill.core.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/core.min.css" %}" rel="stylesheet">
+    <link href="{% static "quill.core.min.css" %}" rel="stylesheet">
+    <link href="{% static "core.min.css" %}" rel="stylesheet">
   </head>
   <body class="vsc-initialized">
     <div class="tl_page_wrap">
       <div class="tl_page">
-        <main class="tl_article tl_article_editable tl_article_edit">
+        <main class="tl_article tl_article_editable tl_article_edit title_focused">
           <header class="tl_article_header" dir="auto">
             <h1></h1>
             <address>
@@ -54,7 +53,7 @@
               <span class="close"></span>
               <div class="prompt_input_wrap"><input type="url" class="prompt_input"></div>
             </div>
-          </div><div id="_tl_blocks" class="tl_blocks" style="top: 90.2167px;">
+          </div><div id="_tl_blocks" class="tl_blocks">
             <div class="buttons">
               <button id="_image_button"></button><!--
            --><button id="_embed_button"></button>
@@ -65,11 +64,8 @@
           
           <aside class="tl_article_buttons">
             <div class="account account_top"></div>
-            <button id="_edit_button" class="button edit_button">Edit</button>
-            <form>
-            <input>
-            <button type="submit" id="_publish_button" class="button publish_button">Publish</button>
-            </form>
+            <button id="_edit_button" class="button edit_button">Edit</button><!--
+         --><button id="_publish_button" class="button publish_button">Publish</button>
             <div class="account account_bottom"></div>
             <div id="_error_msg" class="error_msg"></div>
           </aside>
@@ -79,14 +75,12 @@
     </div>
     
     
-    {% comment %} <script>var T={"apiUrl":"https:\/\/edit.telegra.ph","datetime":0,"pageId":0,"editable":true};(function(){var b=document.querySelector('time');if(b&&T.datetime){var a=new Date(1E3*T.datetime),d='January February March April May June July August September October November December'.split(' ')[a.getMonth()],c=a.getDate();b.innerText=d+' '+(10>c?'0':'')+c+', '+a.getFullYear()}})();</script>
-    <script src="Telegraph_files/jquery.min.js"></script>
-    <script src="Telegraph_files/jquery.selection.min.js"></script>
-    <script src="Telegraph_files/autosize.min.js"></script>
-    <script src="Telegraph_files/load-image.all.min.js"></script>
-    <script src="Telegraph_files/quill.min.js"></script>
-    <script src="Telegraph_files/core.min.js"></script>
-    <script async="" src="Telegraph_files/_websync_"></script> {% endcomment %}
+    <script>var T={"apiUrl":"http://127.0.0.1:8000","datetime":0,"pageId":0,"editable":true};(function(){var b=document.querySelector('time');if(b&&T.datetime){var a=new Date(1E3*T.datetime),d='January February March April May June July August September October November December'.split(' ')[a.getMonth()],c=a.getDate();b.innerText=d+' '+(10>c?'0':'')+c+', '+a.getFullYear()}})();</script>
+    <script src="{% static "jquery.min.js" %}"></script>
+    <script src="{% static "jquery.selection.min.js" %} "></script>
+    <script src="{% static "autosize.min.js" %} "></script>
+    <script src="{% static "load-image.all.min.js" %} "></script>
+    <script src="{% static "quill.min.js" %} "></script>
+    <script src="{% static "core.min.js" %}"></script>
   
 </body></html>
-{% endblock %}

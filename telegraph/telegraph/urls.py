@@ -23,17 +23,17 @@ from tele.views import *
 
 
 urlpatterns = [
-    path('', ArticleCreate.as_view()),
-    # re_path(r'^(?P<year>[0-9]{2})-(?P<month>[0-9]{2})-(?P<day>[0-9]{4})$', ShowArticle.as_view(), name='showArticle2'),
+    path('', post),
+    # re_path(r'^(?P<title>[a-zA-Z0-9_-]+\-[0-9]{2}\-[0-9]{2}\-[0-9]{4})$', ShowArticle.as_view(), name='showArticle2'),
     path('<int:pk>', ShowArticle.as_view(), name='showArticle'),
-    path('home', home),
     path('admin/', admin.site.urls),
-    # path('name', get_name),
-    path('name', get_name_by_id.as_view()),
-    path('add_okrig', add_okrig)
 ]
 
 if settings.DEBUG:
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = pageNotFound
+
+
+
+#re_path(r'^(?P<title>[a-zA-Z0-9_-]+)\-(?P<day>[0-9]{2})\-(?P<pk>[0-9]{2})\-(?P<year>[0-9]{4})$'

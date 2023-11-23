@@ -2,42 +2,14 @@ from django.db import models
 from django.urls import reverse
 
 
-class Okrug(models.Model):
-    name = models.CharField(max_length=200)
-
-
-class Uchastok(models.Model):
-    namber = models.CharField(max_length=200)
-    okrug = models.ForeignKey(to=Okrug, on_delete=models.DO_NOTHING)
-    
-    def __str__(self):
-        return f'{self.namber},{self.okrug}'
-    
-class list_Uchastkov(models.Model):
-    adress = models.CharField(max_length=200)
-    uchastok = models.ForeignKey(to=Uchastok, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f'{self.adress},{self.uchastok}'
-    
-class bith_year(models.Model):
-    year = models.IntegerField()
-    uchastok = models.ForeignKey(to=Uchastok, on_delete=models.CASCADE)
-    
-class kartochka(models.Model):
-    year = models.ForeignKey(to=bith_year, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=200)
-    second_name = models.CharField(max_length=200)
-    adress = models.ForeignKey(to = list_Uchastkov, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f'{self.year},{self.first_name},{self.second_name},{self.adress}'
-    
-
 class Article(models.Model):
-    name = models.CharField(max_length=200)
-    msg = models.TextField()
-    img = models.ImageField(null=True,blank=True,upload_to='media/img')
+    title = models.CharField(max_length=200)
+    body = models.TextField()
 
     def get_absolute_url(self):
         return reverse('showArticle', kwargs={'pk': self.pk})
+
+class Images(models.Model):
+    post = models.ForeignKey(Article, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/img',
+                              verbose_name='Image')

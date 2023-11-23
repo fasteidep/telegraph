@@ -5,6 +5,10 @@ from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, FormView, CreateView, DetailView
+from django.http import JsonResponse
+from django.forms import modelformset_factory
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import *
 
@@ -87,19 +91,59 @@ class ArticleCreate(CreateView):
     
     
 class ShowArticle(DetailView):
+    # pk_url_kwarg = "title"
     model = Article
     template_name = "tele/ShowArticle.html"
     
     def get_context_data(self, **kwargs):
         context = super(ShowArticle, self).get_context_data(**kwargs)
         
-        context['article'] = self.model.objects.get(pk=self.kwargs['pk']) 
+        context['article'] = self.model.objects.get(pk=self.kwargs['pk'])
+        context['imgs'] = Images.objects.all().filter(post = self.kwargs['pk']) 
         
         return context
     
+@csrf_exempt
+def check(request):
+    # print(request)
+
+    return JsonResponse({"short_name":"","author_name":"","author_url":"","save_hash":"ee09c197b42b76500c1af90a14fc24bb90a9","can_edit":False})
+
+def post(request):
+ 
+    ImageFormSet = modelformset_factory(Images,
+                                        form=ImageForm, extra=3)
+    #'extra' means the number of photos that you can upload   ^
+    if request.method == 'POST':
+        
+        print(request.POST)
+        postForm = PostForm(request.POST)
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=Images.objects.none())
     
     
+        if postForm.is_valid() and formset.is_valid():
+            post_form = postForm.save(commit=False)
+            post_form.save()
     
+            for form in formset.cleaned_data:
+                #this helps to not crash if the user   
+                #do not upload all the photos
+                if form:
+                    image = form['image']
+                    photo = Images(post=post_form, image=image)
+                    photo.save()
+            # use django messages framework
+            messages.success(request,
+                             "Yeeew, check it out on the home page!")
+            return HttpResponseRedirect(f"/{post_form.pk}")
+        else:
+            print(postForm.errors, formset.errors)
+    else:
+        postForm = PostForm()
+        formset = ImageFormSet(queryset=Images.objects.none())
+    return render(request, 'tele/index.html',
+                  {'postForm': postForm, 'formset': formset})
     
     
 

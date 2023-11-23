@@ -1,7 +1,8 @@
 {% load static %}
 {% block content %}
-{{object.name}}<br>
-{{object.msg}}
-{{ object.img.path }}
-<img src='{{object.img.url}}'/>
+{{object.title}}<br>
+{{object.body}}
+{% for img in imgs %}
+<img src='{{img.image.url}}' alt=''>
+{%endfor%}
 {% endblock %}
