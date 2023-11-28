@@ -8,14 +8,8 @@
     {% for field in postForm %}
         {{ field }} <br />
     {% endfor %}
- 
-    {{ formset.management_form }}
-    {% for form in formset %}
-        {{ form }}
-    {% endfor %}
 
-    {% comment %} <input type="file" name="name" multiple><br><br> {% endcomment %}
- 
+    <input type="file" name="name" multiple><br><br>
  
     <input type="submit" name="submit" value="Submit" />
 </form>
