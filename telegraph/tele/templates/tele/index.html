@@ -1,15 +1,45 @@
-<form id="post_form" method="post" action="" enctype="multipart/form-data">
- 
-    {% csrf_token %}
-    {% for hidden in postForm.hidden_fields %}
-        {{ hidden }}
-    {% endfor %}
- 
-    {% for field in postForm %}
-        {{ field }} <br />
-    {% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src ="{% static "core.js" %}"></script>
+    <link href="{% static "test.css" %}" rel="stylesheet">
+    <title>Form</title>
+</head>
+<body style="background-color: #262a2b; color: #fff;">
+  <div class="container">
+    <form id="post_form" method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="id_title">Title</label>
+        {{postForm.title}}
+      </div>
+      <div class="form-group">
+        <label for="id_body">Body</label>
+        <textarea id="id_body" class="form-control bg-dark" style="border-color: rgb(60, 65, 68); background-color: rgb(44, 47, 49) !important; color: rgb(181, 175, 166);" name="body"></textarea>
+      </div>
+      <div class="form-group">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <div class="container">
+            <fieldset class="form-group">
+                <a href="javascript:void(0)" style="color:#fff" onclick="$('#pro-image').click()">Upload Image</a>
+                <input type="file" id="pro-image" name="pro-image[]" style="display: none; border: 1px solid #424242;" class="form-control " multiple>
+            </fieldset>
+            <div class="preview-images-zone" style="border-color: rgb(60, 65, 68);">
+            </div>
+        </div>
+      </div>
+      <input type="file" hidden id="loaded-images-input" name="pro-image" class="loadedimgs" multiple>
+      <button type="submit" class="submit-button btn btn-primary mt-2">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
 
-    <input type="file" name="name" multiple><br><br>
- 
-    <input type="submit" name="submit" value="Submit" />
-</form>
